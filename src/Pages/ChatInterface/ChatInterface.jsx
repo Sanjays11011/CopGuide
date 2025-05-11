@@ -15,6 +15,9 @@ const ChatInterface = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
+  // State to track displayed text for typewriter effect
+  const [displayedTexts, setDisplayedTexts] = useState({});
+
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
@@ -49,13 +52,6 @@ const ChatInterface = () => {
       console.error("Speech Recognition API not supported in this browser.");
     }
   }, []);
-
-  // useEffect(() => {
-  //   const token = sessionStorage.getItem('token');
-  //   if (!token) {
-  //     navigate('/');
-  //   }
-  // }, [navigate]);
 
   const handleVoiceInput = () => {
     if (recognitionRef.current) {
@@ -95,10 +91,13 @@ const ChatInterface = () => {
 
       const botMessage = {
         sender: "bot",
-        text: result.data.answer, // only "answer" key from response
+        text: result.data.answer,
+        id: Date.now(), // Unique ID for each message
       };
 
       setMessages((prevMessages) => [...prevMessages, botMessage]);
+      // Initialize displayed text for the new bot message
+      setDisplayedTexts((prev) => ({ ...prev, [botMessage.id]: "" }));
     } catch (err) {
       console.error(err);
       setError("Error fetching data from the chatbot.");
@@ -106,6 +105,35 @@ const ChatInterface = () => {
       setLoading(false);
     }
   };
+
+  // Typewriter effect for bot messages
+  useEffect(() => {
+    const timers = {};
+
+    messages.forEach((message) => {
+      if (message.sender === "bot" && displayedTexts[message.id] !== message.text) {
+        let index = displayedTexts[message.id]?.length || 0;
+        const fullText = message.text;
+
+        if (index < fullText.length) {
+          timers[message.id] = setInterval(() => {
+            setDisplayedTexts((prev) => ({
+              ...prev,
+              [message.id]: fullText.slice(0, index + 1),
+            }));
+            index++;
+            if (index >= fullText.length) {
+              clearInterval(timers[message.id]);
+            }
+          }, 10); // Adjust speed (50ms per character)
+        }
+      }
+    });
+
+    return () => {
+      Object.values(timers).forEach((timer) => clearInterval(timer));
+    };
+  }, [messages, displayedTexts]);
 
   useEffect(() => {
     if (chatBoxRef.current) {
@@ -272,18 +300,24 @@ const ChatInterface = () => {
           {messages.map((message, index) => (
             <div
               key={index}
-              className={`mb-4 ${
-                message.sender === "user" ? "text-right" : "text-left"
+              className={`mb-4 text-lg ${
+                message.sender === "user"
+                  ? "text-right"
+                  : "text-left leading-relaxed"
               }`}
             >
               <div
                 className={`inline-block p-4 rounded-lg ${
                   message.sender === "user"
                     ? "bg-blue-600 text-white"
-                    : "bg-gray-700 text-gray-200"
+                    : `bg-none text-gray-200`
                 }`}
               >
-                <p>{message.text}</p>
+                <p>
+                  {message.sender === "bot"
+                    ? displayedTexts[message.id] || ""
+                    : message.text}
+                </p>
               </div>
             </div>
           ))}
