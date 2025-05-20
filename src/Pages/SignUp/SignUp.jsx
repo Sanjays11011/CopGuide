@@ -52,9 +52,9 @@ const SignUp = () => {
 
 
   return (
-    <div className="flex h-screen font-outfit">
+    <div className="flex h-screen font-outfit bg-gray-800">
       {/* Left Section - Image */}
-      <div className="w-2/5 bg-blue-500 md:flex justify-center items-center hidden">
+      <div className="w-2/5 x md:flex justify-center items-center hidden">
         <img
           src={SignUpImg}
           alt="Robot holding a phone"
@@ -62,54 +62,55 @@ const SignUp = () => {
         />
       </div>
       {/* Right Section - Form */}
-      <div className="md:w-1/2 w-full bg-white flex flex-col justify-center items-center">
-        <h1 className="md:text-5xl text-3xl mb-6">Sign Up</h1>
+      <div className="md:w-1/2 w-full bg-gray-800 flex flex-col justify-center items-center">
+        <h1 className="md:text-5xl text-white text-3xl mb-6">Sign Up</h1>
 
         <form className="space-y-4 md:w-3/4 w-full" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
-            <input
-              type="text"
-              id="username"
-              className="w-full p-3 border rounded mt-1 focus:ring-2 focus:ring-primary focus:outline-none"
-              placeholder="Enter your username"
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-            <input
-              type="email"
-              id="email"
-              className="w-full p-3 border rounded mt-1 focus:ring-2 focus:ring-primary focus:outline-none"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
-            <input
-              type="password"
-              id="password"
-              className="w-full p-3 border rounded mt-1 focus:ring-2 focus:ring-primary focus:outline-none"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="confirm_password" className="block text-sm font-medium text-gray-700">Confirm Password</label>
-            <input
-              type="password"
-              id="confirm_password"
-              className="w-full p-3 border rounded mt-1 focus:ring-2 focus:ring-primary focus:outline-none"
-              placeholder="Confirm your password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-          </div>
+  <label htmlFor="username" className="block text-sm font-medium text-gray-300">Username</label>
+  <input
+    type="text"
+    id="username"
+    className="w-full p-3 border rounded mt-1 bg-gray-700 border-gray-600 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+    placeholder="Enter your username"
+    value={userName}
+    onChange={(e) => setUserName(e.target.value)}
+  />
+</div>
+<div>
+  <label htmlFor="email" className="block text-sm font-medium text-gray-300">Email</label>
+  <input
+    type="email"
+    id="email"
+    className="w-full p-3 border rounded mt-1 bg-gray-700 border-gray-600 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+    placeholder="Enter your email"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+  />
+</div>
+<div>
+  <label htmlFor="password" className="block text-sm font-medium text-gray-300">Password</label>
+  <input
+    type="password"
+    id="password"
+    className="w-full p-3 border rounded mt-1 bg-gray-700 border-gray-600 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none" 
+    placeholder="Enter your password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+  />
+</div>
+<div>
+  <label htmlFor="confirm_password" className="block text-sm font-medium text-gray-300">Confirm Password</label>
+  <input
+    type="password"
+    id="confirm_password"
+    className="w-full p-3 border rounded mt-1 bg-gray-700 border-gray-600 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"   
+    placeholder="Confirm your password"
+    value={confirmPassword}
+    onChange={(e) => setConfirmPassword(e.target.value)}
+  />
+</div>
+
 
           {/* Error or Success message */}
           {error && <p className="text-red-500 text-sm">{error}</p>}
@@ -122,24 +123,24 @@ const SignUp = () => {
                 id="remember"
                 className="h-4 w-4 text-blue-600 border-gray-300 rounded"
               />
-              <label htmlFor="remember" className="ml-2 block text-sm text-gray-900">Remember me</label>
+              <label htmlFor="remember" className="ml-2 block text-sm text-blue-400">Remember me</label>
             </div>
 
             <div className="text-sm">
-              <a href="#" className="text-[#00357B] hover:text-blue-500">Forgot Password?</a>
+              <a href="#" className="text-blue-400 hover:text-blue-500">Forgot Password?</a>
             </div>
           </div>
 
           <button
             type="submit"
-            className="w-full bg-[#00357B] text-white p-3 rounded-lg"
+            className="w-full bg-blue-600 text-white p-3 rounded-lg"
           >
             Sign Up
           </button>
         </form>
 
-        <p className="mt-4 text-sm text-center text-gray-600">
-          Already have an account?<Link to='/' className="text-[#00357B]">Sign In</Link>
+        <p className="mt-4 text-sm text-center text-gray-400">
+          Already have an account?<Link to='/' className="text-blue-400">Sign In</Link>
         </p>
       </div>
     </div>
