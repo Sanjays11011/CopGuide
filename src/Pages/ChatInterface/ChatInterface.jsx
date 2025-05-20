@@ -127,7 +127,7 @@ const ChatInterface = () => {
     setQValues(null);
 
     try {
-      const result = await axios.post("http://127.0.0.1:5000/search", {
+      const result = await axios.post("https://copguide-backend.onrender.com/search", {
         question: userMessage.text,
       });
       console.log("Search response:", result.data);
@@ -158,7 +158,7 @@ const ChatInterface = () => {
     }
 
     try {
-      const response = await axios.post("http://127.0.0.1:5000/feedback", {
+      const response = await axios.post("https://copguide-backend.onrender.com/feedback", {
         feedback_id: message.feedback_id,
         feedback: feedbackScore,
         doc_index: message.doc_index,
@@ -189,7 +189,7 @@ const ChatInterface = () => {
     }
 
     try {
-      const response = await axios.get("http://127.0.0.1:5000/qvalues", {
+      const response = await axios.get("https://copguide-backend.onrender.com/qvalues", {
         params: { question },
       });
       console.log("Q-values response:", response.data);
