@@ -327,7 +327,7 @@ const ChatInterface = () => {
         {showPrompts && (
           <div>
             <div className="pl-10 pb-2 bg-[#0f172a] flex flex-col items-center">
-              <h1 className="md:text-5xl text-2xl font-semibold bg-gradient-to-r from-[#06b6d4] to-[#7c3aed] bg-clip-text text-transparent">
+              <h1 className="md:text-5xl h-16 text-2xl font-semibold bg-gradient-to-r from-[#06b6d4] to-[#7c3aed] bg-clip-text text-transparent">
                 Hello, <span>Ragavan</span>
               </h1>
               <p className="text-[#cbd5e1] mt-2 md:text-5xl text-2xl">
